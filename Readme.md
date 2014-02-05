@@ -6,13 +6,13 @@
 ## Installation
 
 ```
-$ npm install segmentio/gh
+$ npm install gh2
 ```
 
 ## Example
 
 ```js
-var Github = require('gh');
+var Github = require('gh2');
 
 var gh = new Github({
   token: 'github-auth-token'
