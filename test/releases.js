@@ -1,7 +1,7 @@
 
 var Client = require('..');
 
-describe('gh.releases(opts, fn)', function(){
+describe('gh.releases(repo, fn)', function(){
   it('should respond with private releases via .token', function(done){
     var gh = new Client({
       token: process.env.TOKEN

@@ -97,16 +97,16 @@ Client.prototype.releases = function(repo, fn){
 /**
  * Get contents of `path` at `ref.
  *
- *   gh.contents('component/tip', 'component.json', '1.0.0', fn);
+ *   gh.contents('component/tip' '1.0.0', 'component.json', fn);
  *
  * @param {String} repo
- * @param {String} path
  * @param {String} ref
+ * @param {String} path
  * @param {Function} fn
  * @api public
  */
 
-Client.prototype.contents = function(repo, path, ref, fn){
+Client.prototype.contents = function(repo, ref, path, fn){
   var path = '/repos/' + repo + '/contents/' + path + '?ref=' + ref;
   this.get(path, fn);
 };
