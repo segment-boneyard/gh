@@ -25,7 +25,15 @@ gh.lookup('visionmedia/co', '1.x', function(err, release){
 
 ## API
 
-### Client(opts:Object)
+  - [api](#api)
+  - [Client()](#client)
+  - [Client.stream()](#clientstreamrepostringrefstringpathstring)
+  - [Client.get()](#clientgetpathstringfnfunction)
+  - [Client.releases()](#clientreleasesrepostringfnfunction)
+  - [Client.contents()](#clientcontentsrepostringrefstringpathstringfnfunction)
+  - [Client.lookup()](#clientlookuprepostringversionstringfnfunction)
+
+## Client(opts:Object)
 
   Fetch releases with `opts`:
 
@@ -34,12 +42,32 @@ gh.lookup('visionmedia/co', '1.x', function(err, release){
   - `pass` optional github pass
   - `ua` user-agent string [gh]
 
+### Client.stream(repo:String, ref:String, path:String)
+
+  Return a stream for `repo`'s `path` at `ref`.
+
+```js
+ gh.stream('component/tip', '1.0.0', 'component.json');
+```
+
+### Client.get(path:String, fn:Function)
+
+  GET the given `path`.
+
 ### Client.releases(repo:String, fn:Function)
 
   Respond with releases for `repo`.
 
 ```js
 gh.releases('component/tip', fn);
+```
+
+### Client.contents(repo:String, ref:String, path:String, fn:Function)
+
+  Get contents of `path` at `ref.
+
+```js
+gh.contents('component/tip' '1.0.0', 'component.json', fn);
 ```
 
 ### Client.lookup(repo:String, version:String, fn:Function)
