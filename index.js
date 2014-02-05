@@ -44,11 +44,12 @@ function Client(opts) {
  * Return request options for `url`.
  *
  * @param {String} str
+ * @param {Object} [opts]
  * @return {Object}
  * @api private
  */
 
-Client.prototype.options = function(url){
+Client.prototype.options = function(url, other){
   var token = this.token;
   var user = this.user;
   var pass = this.pass;
@@ -57,6 +58,10 @@ Client.prototype.options = function(url){
     url: url,
     headers: { 'User-Agent': this.ua }
   };
+
+  if (other) {
+    for (var k in other) opts[k] = other[k];
+  }
 
   if (token) opts.headers.Authorization = 'Bearer ' + token;
   if (user && pass) opts.headers.Authorization = 'Basic ' + basic(user, pass);
@@ -73,8 +78,7 @@ Client.prototype.options = function(url){
  */
 
 Client.prototype.get = function(path, fn){
-  var opts = this.options(api + path);
-  opts.json = true;
+  var opts = this.options(api + path, { json: true });
 
   request(opts, function(err, res, body){
     if (err) fn(err);
