@@ -92,7 +92,7 @@ Client.prototype.lookup = function(repo, version, fn){
     if (err) return fn(err);
 
     try {
-      var tags = find(tags, version);
+      var tag = find(tags, version);
     } catch (err) {
       return fn(err);
     }
