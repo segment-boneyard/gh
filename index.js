@@ -8,6 +8,12 @@ var semver = require('semver');
 var ms = require('ms');
 
 /**
+ * API url.
+ */
+
+var api = 'https://api.github.com';
+
+/**
  * Expose `Client`.
  */
 
@@ -35,17 +41,15 @@ function Client(opts) {
 }
 
 /**
- * Respond with releases for `repo`.
+ * GET the given `path`.
  *
- *   gh.releases('component/tip', fn);
- *
- * @param {String} repo
+ * @param {String} path
  * @param {Function} fn
  * @api public
  */
 
-Client.prototype.releases = function(repo, fn){
-  var url = 'https://api.github.com/repos/' + repo + '/tags';
+Client.prototype.get = function(path, fn){
+  var url = api + path;
   var token = this.token;
   var user = this.user;
   var pass = this.pass;
@@ -74,6 +78,37 @@ Client.prototype.releases = function(repo, fn){
 
     fn(null, body);
   });
+};
+
+/**
+ * Respond with releases for `repo`.
+ *
+ *   gh.releases('component/tip', fn);
+ *
+ * @param {String} repo
+ * @param {Function} fn
+ * @api public
+ */
+
+Client.prototype.releases = function(repo, fn){
+  this.get('/repos/' + repo + '/tags', fn);
+};
+
+/**
+ * Get contents of `path` at `ref.
+ *
+ *   gh.contents('component/tip', 'component.json', '1.0.0', fn);
+ *
+ * @param {String} repo
+ * @param {String} path
+ * @param {String} ref
+ * @param {Function} fn
+ * @api public
+ */
+
+Client.prototype.contents = function(repo, path, ref, fn){
+  var path = '/repos/' + repo + '/contents/' + path + '?ref=' + ref;
+  this.get(path, fn);
 };
 
 /**
