@@ -14,7 +14,8 @@
   },
   "devDependencies": {
     "mocha": "*",
-    "should": "*"
+    "should": "*",
+    "concat-stream": "visionmedia/node-concat-stream"
   },
   "license": "MIT"
 }

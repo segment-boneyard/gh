@@ -70,6 +70,24 @@ Client.prototype.options = function(url, other){
 };
 
 /**
+ * Return a stream for `repo`'s `path` at `ref`.
+ *
+ *    gh.stream('component/tip', '1.0.0', 'component.json');
+ *
+ * @param {String} repo
+ * @param {String} ref
+ * @param {String} path
+ * @return {Request}
+ * @api public
+ */
+
+Client.prototype.stream = function(repo, ref, path, fn){
+  var url = 'https://raw.github.com/' + repo + '/' + ref + '/' + path;
+  var opts = this.options(url);
+  return request(opts);
+};
+
+/**
  * GET the given `path`.
  *
  * @param {String} path
