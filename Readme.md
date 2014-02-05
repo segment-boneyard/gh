@@ -25,7 +25,6 @@ gh.lookup('visionmedia/co', '1.x', function(err, release){
 
 ## API
 
-  - [api](#api)
   - [Client()](#client)
   - [Client.stream()](#clientstreamrepostringrefstringpathstring)
   - [Client.get()](#clientgetpathstringfnfunction)
