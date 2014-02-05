@@ -41,6 +41,30 @@ function Client(opts) {
 }
 
 /**
+ * Return request options for `url`.
+ *
+ * @param {String} str
+ * @return {Object}
+ * @api private
+ */
+
+Client.prototype.options = function(url){
+  var token = this.token;
+  var user = this.user;
+  var pass = this.pass;
+
+  var opts = {
+    url: url,
+    headers: { 'User-Agent': this.ua }
+  };
+
+  if (token) opts.headers.Authorization = 'Bearer ' + token;
+  if (user && pass) opts.headers.Authorization = 'Basic ' + basic(user, pass);
+
+  return opts;
+};
+
+/**
  * GET the given `path`.
  *
  * @param {String} path
@@ -49,19 +73,8 @@ function Client(opts) {
  */
 
 Client.prototype.get = function(path, fn){
-  var url = api + path;
-  var token = this.token;
-  var user = this.user;
-  var pass = this.pass;
-
-  var opts = {
-    url: url,
-    headers: { 'User-Agent': this.ua },
-    json: true
-  };
-
-  if (token) opts.headers.Authorization = 'Bearer ' + token;
-  if (user && pass) opts.headers.Authorization = 'Basic ' + basic(user, pass);
+  var opts = this.options(api + path);
+  opts.json = true;
 
   request(opts, function(err, res, body){
     if (err) fn(err);
