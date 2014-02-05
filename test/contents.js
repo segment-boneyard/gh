@@ -2,7 +2,7 @@
 var Client = require('..');
 var assert = require('assert');
 
-describe.only('gh.contents(repo, path, ref, fn)', function(){
+describe('gh.contents(repo, path, ref, fn)', function(){
   it('should respond with file contents', function(done){
     var gh = new Client({
       token: process.env.TOKEN

@@ -78,6 +78,12 @@ gh.contents('component/tip' '1.0.0', 'component.json', fn);
 gh.lookup('component/tip', '1.x', fn);
 ```
 
+## Running tests
+
+```
+$ TOKEN=<token> USER=<user> PASS=<pass> make test
+```
+
 # License
 
   MIT
